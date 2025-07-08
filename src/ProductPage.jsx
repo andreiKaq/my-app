@@ -2,11 +2,13 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Badge from 'react-bootstrap/Badge';
+import Category from './Category';
 
 
-const productPage = () => {
+const ProductPage = () => {
     return (
         <Container>
+            <Category />
             <Row>
                 <Col>
                     Image
@@ -28,4 +30,4 @@ const productPage = () => {
     
 }
 
-export default productPage
+export default ProductPage
