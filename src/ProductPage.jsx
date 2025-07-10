@@ -3,9 +3,22 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Badge from 'react-bootstrap/Badge';
 import Category from './Category';
+import Button from 'react-bootstrap/Button'
 
 
-const ProductPage = () => {
+
+const ProductPage = ({ setCartProducts }) => {
+    const addProduct = (product) => {
+        setCartProducts(products => [...products, product])
+        // setCartProducts(products => {
+        //     products.push(product)
+        //     return products
+        // })
+
+    }
+
+    const dummyProduct = { id: 1 }
+
     return (
         <Container>
             <Category />
@@ -21,6 +34,9 @@ const ProductPage = () => {
                     </div>
                     <div>
                         <Badge bg="secondary">4.9/120</Badge>
+                    </div>
+                    <div>
+                        <Button variant='primary' onClick={() => addProduct(dummyProduct)}>Add to cart</Button>
                     </div>
 
                 </Col>
