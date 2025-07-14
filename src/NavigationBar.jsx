@@ -35,7 +35,7 @@ function NavigationBar({ handleShowCart, cartItems, handleShowModal }) {
             </Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link href='#modal' onClick={handleShowModal}>
+            <Nav.Link href='#modal'>
               <ModalForm/>
             </Nav.Link>
           </Nav>
