@@ -3,9 +3,10 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Products from './Products';
 
 
-function ProductCart() {
+function ProductCart({ product, setCartProducts }) {
     const [count, setCount] = React.useState(1)
 
     const handleAddCount = () => {
@@ -14,6 +15,9 @@ function ProductCart() {
 
     const handleDelete = () => {
         setCount(count - 1)
+        if (count <= 0) {
+            
+        }
   
     }
 
@@ -27,6 +31,7 @@ function ProductCart() {
                             <span className='fs-4'>Card Title</span>
                             <br />
                             Count: {count}
+                            
                         </Card.Text>
                     </Col>
                     <Col>

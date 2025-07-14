@@ -1,7 +1,7 @@
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Products from './Products';
 
-const Cart = ({ showCart, handleHideCart, cartProducts }) => {
+const Cart = ({ showCart, handleHideCart, cartProducts, setCartProducts }) => {
 
     return (
         <>
