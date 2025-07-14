@@ -3,6 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Badge from 'react-bootstrap/Badge';
+import ModalForm from './ModalForm';
 
 function NavigationBar({ handleShowCart, cartItems, handleShowModal }) {
   return (
@@ -35,7 +36,7 @@ function NavigationBar({ handleShowCart, cartItems, handleShowModal }) {
           </Nav>
           <Nav>
             <Nav.Link href='#modal' onClick={handleShowModal}>
-              Sign-in
+              <ModalForm/>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

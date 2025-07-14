@@ -30,7 +30,7 @@ function App() {
       {/* <Products /> */}
       <ProductPage setCartProducts={setCartProducts} />
       <Cart cartProducts={cartProducts} showCart={showCart} handleHideCart={handleHideCart}/>
-      <ModalForm showModal={showModal}/>
+      
       
     </>
   )
