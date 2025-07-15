@@ -22,12 +22,12 @@ function ModalForm({ showModal, setShowModal }) {
 
   return (
     <>
-        <Button variant="outline-info" onClick={() => handleShow('sign-in')}>
+        {/* <Button variant="outline-info" onClick={() => handleShow('sign-in')}>
           Sign-In
         </Button>
         <Button variant="outline-info" onClick={() => handleShow('sign-up')} className='ms-2'>
           Sign-Up
-        </Button>
+        </Button> */}
 
 
       <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)} >

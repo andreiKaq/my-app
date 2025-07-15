@@ -7,18 +7,21 @@ import Cart from "./Cart"
 import ModalForm from './ModalForm'
 import Footer from './Footer'
 import Slider from './Slider'
+import AuthModal from './AuthModal'
 
 
 function App() {
   const [showCart, setShowCart] = React.useState(false)
-  const [cartProducts, setCartProducts] = React.useState([])
   const [showModal, setShowModal] = React.useState(false);
+
+  const [cartProducts, setCartProducts] = React.useState([])
 
 
   const handleShowCart = () => setShowCart(true);
   const handleHideCart = () => setShowCart(false);
-  const handleShowModal = () => setShowModal(true)
 
+  const handleShowModal = () => setShowModal(true)
+  const handleHideModal = () => setShowModal(false)
 
   return (
     <>
@@ -28,6 +31,7 @@ function App() {
           handleShowCart={handleShowCart}
           cartItems={cartProducts}
           handleShowModal={handleShowModal}
+          handleHideModal={handleHideModal}
           showModal={showModal}
         />
 
@@ -36,7 +40,7 @@ function App() {
           {/* <Products /> */}
           <ProductPage setCartProducts={setCartProducts} />
           <Cart cartProducts={cartProducts} showCart={showCart} handleHideCart={handleHideCart} />
-
+          <AuthModal show={showModal} handleClose={handleHideModal}/>
 
 
         </div>

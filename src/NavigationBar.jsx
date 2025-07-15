@@ -21,7 +21,7 @@ function NavigationBar({ handleShowCart, cartItems, handleShowModal }) {
               <NavDropdown.Item href="#action/3.2">
                 Another action
               </NavDropdown.Item>
-              
+
               <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">
@@ -30,17 +30,20 @@ function NavigationBar({ handleShowCart, cartItems, handleShowModal }) {
             </NavDropdown>
           </Nav>
           <Nav>
+            <Nav.Link onClick={handleShowModal}>
+              Login
+            </Nav.Link>
             <Nav.Link href="#cart" onClick={handleShowCart}>
               Cart
               <Badge bg="success" className='ms-2'>{cartItems.length}</Badge>
 
             </Nav.Link>
           </Nav>
-          <Nav>
+          {/* <Nav>
             <Nav.Link href='#modal'>
               <ModalForm/>
             </Nav.Link>
-          </Nav>
+          </Nav> */}
         </Navbar.Collapse>
       </Container>
     </Navbar>
