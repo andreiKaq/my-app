@@ -36,7 +36,7 @@ const ProductPage = ({ setCartProducts }) => {
                         <Badge bg="secondary">4.9/120</Badge>
                     </div>
                     <div>
-                        <Button variant='primary' onClick={() => addProduct(dummyProduct)}>Add to cart</Button>
+                        <Button variant="outline-primary" onClick={() => addProduct(dummyProduct)}>Add to cart</Button>
                     </div>
 
                 </Col>

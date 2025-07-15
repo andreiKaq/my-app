@@ -1,3 +1,69 @@
+body.modal-open {
+    padding-right: 0 !important;
+}
+
 .offcanvas {
     --bs-offcanvas-width: 600px;
+}
+
+
+body,
+html,
+#root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.app-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex: 1;
+}
+
+.breadcrumb a {
+    color: #fff !important;
+}
+
+.breadcrumb-item.active {
+    color: #6c757d !important;
+}
+
+.carousel-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.carousel-wrapper img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+
+body.modal-open {
+    overflow-x: hidden !important;
+}
+
+footer {
+    height: 300px;
+}
+
+.custom-badge {
+    font-size: 18px;
+
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    font-weight: bold;
 }

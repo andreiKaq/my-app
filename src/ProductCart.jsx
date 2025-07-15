@@ -3,10 +3,20 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Products from './Products';
+import Badge from 'react-bootstrap/Badge'
 
 
-function ProductCart() {
+function ProductCart({ product, setCartProducts }) {
     const [count, setCount] = React.useState(1)
+
+     const getRandomNum = (x, y) => {
+        return Math.floor(Math.random() * (y - x + 1)) + x;
+    }
+
+    const [randomPicture] = React.useState(() => getRandomNum(1, 3))
+    const picturePath = `/picture-${randomPicture}.png`
+
 
     const handleAddCount = () => {
         setCount(count + 1)
@@ -14,24 +24,31 @@ function ProductCart() {
 
     const handleDelete = () => {
         setCount(count - 1)
-  
+        if (count <= 0) {
+            return
+        }
+
     }
 
+
+
+
+    
+
     return (
-        <Card>
+        <Card className='bg-transparent text-white border border-secondary mb-4'>
             <Card.Body>
-                <Row>
-                    <Col><Card.Img variant="top" src="holder.js/100px180" width={100} height={100} /></Col>
+                <Row className=''>
+                    <Col><Card.Img variant="top" src={picturePath} width={100} height={100} /></Col>
                     <Col xs={6}>
                         <Card.Text>
                             <span className='fs-4'>Card Title</span>
-                            <br />
-                            Count: {count}
                         </Card.Text>
                     </Col>
-                    <Col>
-                        <Button variant="primary" onClick={handleAddCount}>Add 1</Button>
-                        <Button variant="danger" onClick={handleDelete}>Remove 1</Button>
+                    <Col className='d-flex align-items-center flex-column'>
+                        <Badge className='custom-badge' bg="success" onClick={handleAddCount}>+</Badge >
+                        {count}
+                        <Badge className='custom-badge' bg="danger" onClick={handleDelete}>-</Badge >
 
 
                     </Col>
