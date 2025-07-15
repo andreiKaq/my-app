@@ -5,6 +5,8 @@ import Products from "./Products"
 import ProductPage from "./ProductPage"
 import Cart from "./Cart"
 import ModalForm from './ModalForm'
+import Footer from './Footer'
+import Slider from './Slider'
 
 
 function App() {
@@ -20,18 +22,36 @@ function App() {
 
   return (
     <>
-      <NavigationBar
-      handleShowCart={handleShowCart}
-      cartItems={cartProducts}
-      handleShowModal={handleShowModal}
-      showModal={showModal}
-      />
+      <div className='app-wrapper bg-dark'>
 
-      {/* <Products /> */}
-      <ProductPage setCartProducts={setCartProducts} />
-      <Cart cartProducts={cartProducts} showCart={showCart} handleHideCart={handleHideCart}/>
-      
-      
+        <NavigationBar
+          handleShowCart={handleShowCart}
+          cartItems={cartProducts}
+          handleShowModal={handleShowModal}
+          showModal={showModal}
+        />
+
+
+        <div className='main-content'>
+          {/* <Products /> */}
+          <ProductPage setCartProducts={setCartProducts} />
+          <Cart cartProducts={cartProducts} showCart={showCart} handleHideCart={handleHideCart} />
+
+
+
+        </div>
+        <div className='Slider-wrapper'>
+          <Slider />
+        </div>
+
+        <footer>
+        <Footer />
+        
+        </footer>
+      </div>
+
+
+
     </>
   )
 }

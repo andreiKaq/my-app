@@ -1,10 +1,9 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import ModalForm from './ModalForm';
 
-function SignUpForm() {
+function SignUpForm({ switchForm }) {
     return (
-        <Form>
+        <Form >
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control type="email" placeholder="Enter email" />
@@ -33,6 +32,9 @@ function SignUpForm() {
             </Form.Group>
             <Button variant="primary" type="submit">
                 Create
+            </Button>
+            <Button variant='link' type='submit' onClick={() => switchForm('sign-in')}>
+                Have an account?
             </Button>
         </Form>
     );

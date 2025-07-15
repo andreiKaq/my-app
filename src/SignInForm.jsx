@@ -1,8 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import ModalForm from './ModalForm';
 
-function SignInForm({ isLogin }) {
+function SignInForm({ switchForm  }) {
   return (
     <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -24,7 +23,7 @@ function SignInForm({ isLogin }) {
       <Button variant="primary" type="submit">
         Submit
       </Button>
-      <Button variant="secondary" type="submit" className='ms-4'>
+      <Button variant="secondary" type="submit" className='ms-4' onClick={() => switchForm('sign-up')}>
         Sign Up
       </Button>
     </Form>

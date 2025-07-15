@@ -16,22 +16,26 @@ function ModalForm({ showModal, setShowModal }) {
     setShow(true);
   }
 
+  const switchForm = (type) => {
+    setFormType(type); // переключает форму внутри модалки
+  };
+
   return (
     <>
-        <Button onClick={() => handleShow('sign-in')}>
+        <Button variant="outline-info" onClick={() => handleShow('sign-in')}>
           Sign-In
         </Button>
-        <Button onClick={() => handleShow('sign-up')} className='ms-4'>
+        <Button variant="outline-info" onClick={() => handleShow('sign-up')} className='ms-2'>
           Sign-Up
         </Button>
 
 
-      <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
+      <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)} >
         <Modal.Header closeButton>
           <Modal.Title>{formType === 'sign-in' ? 'Sign-In' : 'Sign-Up'}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          {formType === 'sign-in' ? <SignInForm /> : <SignUpForm />}
+        <Modal.Body >
+          {formType === 'sign-in' ? <SignInForm switchForm={switchForm} /> : <SignUpForm switchForm={switchForm} />}
         </Modal.Body>
       </Modal>
     </>

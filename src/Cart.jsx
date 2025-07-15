@@ -1,11 +1,13 @@
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Products from './Products';
+import AnimatedBox from './AnimatedBox';
 
 const Cart = ({ showCart, handleHideCart, cartProducts, setCartProducts }) => {
 
     return (
         <>
-            <Offcanvas show={showCart} onHide={handleHideCart} placement='end'>
+            <Offcanvas show={showCart} onHide={handleHideCart} placement='end' className="bg-dark text-white">
+                    <AnimatedBox />
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title>Cart</Offcanvas.Title>
                 </Offcanvas.Header>

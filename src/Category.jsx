@@ -2,7 +2,7 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb';
 
 function Category() {
   return (
-    <Breadcrumb>
+    <Breadcrumb className="my-breadcrumb">
       <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
       <Breadcrumb.Item href="https://getbootstrap.com/docs/4.0/components/breadcrumb/">
         Library
