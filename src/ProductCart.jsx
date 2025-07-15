@@ -7,7 +7,7 @@ import Products from './Products';
 import Badge from 'react-bootstrap/Badge'
 
 
-function ProductCart({ product, setCartProducts }) {
+function ProductCart({ product, setCartProducts, handleDeleteCartProduct }) {
     const [count, setCount] = React.useState(1)
 
      const getRandomNum = (x, y) => {
@@ -23,9 +23,13 @@ function ProductCart({ product, setCartProducts }) {
     }
 
     const handleDelete = () => {
-        setCount(count - 1)
-        if (count <= 0) {
-            return
+        const newCount = count - 1
+
+        if (newCount <= 0) {
+            handleDeleteCartProduct(product)
+        } else {
+            
+            setCount(newCount)
         }
 
     }
@@ -43,6 +47,8 @@ function ProductCart({ product, setCartProducts }) {
                     <Col xs={6}>
                         <Card.Text>
                             <span className='fs-4'>Card Title</span>
+                            <br/>
+                            id: {product.id}
                         </Card.Text>
                     </Col>
                     <Col className='d-flex align-items-center flex-column'>

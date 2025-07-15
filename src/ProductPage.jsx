@@ -17,7 +17,7 @@ const ProductPage = ({ setCartProducts }) => {
 
     }
 
-    const dummyProduct = { id: 1 }
+    const dummyProduct = { id: Math.floor(Math.random() * 100) + 1 }
 
     return (
         <Container>
