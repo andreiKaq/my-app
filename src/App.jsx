@@ -23,6 +23,11 @@ function App() {
   const handleShowModal = () => setShowModal(true)
   const handleHideModal = () => setShowModal(false)
 
+  const handleDeleteCartProduct = (product) => {
+    setCartProducts(cartProducts.filter(cartProduct => cartProduct.id !== product.id))
+    // setCartProducts(cartProducts.slice(cartProducts.indexOf(product), 2))
+  }
+
   return (
     <>
       <div className='app-wrapper bg-dark'>
@@ -39,7 +44,7 @@ function App() {
         <div className='main-content'>
           {/* <Products /> */}
           <ProductPage setCartProducts={setCartProducts} />
-          <Cart cartProducts={cartProducts} showCart={showCart} handleHideCart={handleHideCart} />
+          <Cart handleDeleteCartProduct={handleDeleteCartProduct} cartProducts={cartProducts} showCart={showCart} handleHideCart={handleHideCart} />
           <AuthModal show={showModal} handleClose={handleHideModal}/>
 
 

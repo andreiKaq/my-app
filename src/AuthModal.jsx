@@ -6,6 +6,9 @@ import SignUpForm from './SignUpForm';
 import AuthForm from './AuthForm';
 
 function AuthModal({ show, handleClose }) {
+    const formRef = React.useRef()
+
+    const handleClick = () => formRef.current.requestSubmit()
 
     return (
         <Modal show={show} onHide={handleClose}>
@@ -13,13 +16,13 @@ function AuthModal({ show, handleClose }) {
                 <Modal.Title>Modal heading</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <AuthForm />
+                <AuthForm formRef={formRef} />
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
                     Close
                 </Button>
-                <Button variant="primary" onClick={handleClose}>
+                <Button variant="primary" onClick={handleClick}>
                     Login
                 </Button>
             </Modal.Footer>
