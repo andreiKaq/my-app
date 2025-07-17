@@ -6,16 +6,7 @@ import Category from './Category';
 import Button from 'react-bootstrap/Button'
 
 
-
-const ProductPage = ({ setCartProducts }) => {
-    const addProduct = (product) => {
-        setCartProducts(products => [...products, product])
-        // setCartProducts(products => {
-        //     products.push(product)
-        //     return products
-        // })
-
-    }
+const ProductPage = ({ setCartProducts, addProduct={addProduct}}) => {
 
     const dummyProduct = { id: Math.floor(Math.random() * 100) + 1 }
 
@@ -26,7 +17,7 @@ const ProductPage = ({ setCartProducts }) => {
                 <Col>
                     Image
                 </Col>
-                <Col>
+                <Col className='text-white'>
                     <h2>Title</h2>
                     <p>Description</p>
                     <div>
@@ -41,6 +32,7 @@ const ProductPage = ({ setCartProducts }) => {
 
                 </Col>
             </Row>
+            
         </Container>
     )
     
