@@ -10,13 +10,6 @@ import Badge from 'react-bootstrap/Badge'
 function ProductCart({ product, setCartProducts, handleDeleteCartProduct }) {
     const [count, setCount] = React.useState(1)
 
-     const getRandomNum = (x, y) => {
-        return Math.floor(Math.random() * (y - x + 1)) + x;
-    }
-
-    const [randomPicture] = React.useState(() => getRandomNum(1, 3))
-    const picturePath = `/picture-${randomPicture}.png`
-
 
     const handleAddCount = () => {
         setCount(count + 1)
@@ -43,10 +36,10 @@ function ProductCart({ product, setCartProducts, handleDeleteCartProduct }) {
         <Card className='bg-transparent text-white border border-secondary mb-4'>
             <Card.Body>
                 <Row className=''>
-                    <Col><Card.Img variant="top" src={picturePath} width={100} height={100} /></Col>
+                    <Col><Card.Img variant="top" src={product.image} width={100} height={100} /></Col>
                     <Col xs={6}>
                         <Card.Text>
-                            <span className='fs-4'>Card Title</span>
+                            <span className='fs-4'>{product.title}</span>
                             <br/>
                             id: {product.id}
                         </Card.Text>

@@ -4,15 +4,16 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import ProductCart from "./ProductCart"
 
+
 const dummyProducts = Array.from({length: 5})
 
-function Products({ classNameRow, classNameCol, isCartProduct, products = dummyProducts, handleDeleteCartProduct}) {
+function Products({ classNameRow, classNameCol, isCartProduct, products = dummyProducts, handleDeleteCartProduct, addProduct}) {
     return (
         <Container>
             <Row xs={1} md={2} lg={3} xl={4} className={classNameRow}>
                 {products.map((product, index) => (
                 <Col key={index} className={classNameCol}>
-                    {isCartProduct ? <ProductCart product={product} handleDeleteCartProduct={handleDeleteCartProduct} /> : <Product />}
+                    {isCartProduct ? <ProductCart product={product} handleDeleteCartProduct={handleDeleteCartProduct} /> : <Product product={product} addProduct={addProduct}/>}
                 </Col>
                 ))}
             </Row>

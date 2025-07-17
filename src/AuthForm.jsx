@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import AuthControl from './AuthControl';
+import { signIn } from './services/api/Auth';
 
 const actions = {
     SignIn: 'signIn',
@@ -8,19 +9,23 @@ const actions = {
 
 }
 
-function AuthForm({formRef}) {
+function AuthForm({formRef, setAuthData, handleClose}) {
     const [action, setAction] = React.useState(actions.SignIn)
 
     const handleOnSelect = (action) => setAction(action)
     
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
         event.preventDefault()
-        console.log(event.target.username.value)
         
         const username = event.target.username.value
-        const email = event.target.email?.value
+        // const email = event.target.email?.value
         const password = event.target.password.value        
         
+        const { token } = await signIn(username, password)
+
+        setAuthData(authData => ({...authData, jwt: token}))
+
+        handleClose()
     }
 
     return (
@@ -28,7 +33,7 @@ function AuthForm({formRef}) {
             <AuthControl action={action} actions={actions} handleOnSelect={handleOnSelect} />
             <Form.Group className="mb-3" controlId="formBasicUserName">
                 <Form.Label>Username</Form.Label>
-                <Form.Control type="text" placeholder="Enter username" name='username'/>
+                <Form.Control type="text" placeholder="Enter username" name='username' defaultValue='hopkins'/>
             </Form.Group>
 
             {action === actions.SignUp && (
@@ -43,7 +48,7 @@ function AuthForm({formRef}) {
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" name='password'/>
+                <Form.Control type="password" placeholder="Password" name='password' defaultValue='William56$hj'/>
             </Form.Group>
         </Form>
     );

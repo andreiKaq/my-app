@@ -3,10 +3,9 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Badge from 'react-bootstrap/Badge';
-import ModalForm from './ModalForm';
-import Footer from './Footer';
 
-function NavigationBar({ handleShowCart, cartItems, handleShowModal }) {
+
+function NavigationBar({ handleShowCart, cartItems, handleShowModal, authData }) {
   return (
     <Navbar expand="lg" bg="dark-subtle" data-bs-theme="dark" className="mb-4">
       <Container>
@@ -30,20 +29,17 @@ function NavigationBar({ handleShowCart, cartItems, handleShowModal }) {
             </NavDropdown>
           </Nav>
           <Nav>
-            <Nav.Link onClick={handleShowModal}>
-              Login
-            </Nav.Link>
+            {authData.data.user ? <Navbar.Text>{authData.data.user}</Navbar.Text> : (
+              <Nav.Link onClick={handleShowModal}>
+                Login
+              </Nav.Link>
+            )}
             <Nav.Link href="#cart" onClick={handleShowCart}>
               Cart
               <Badge bg="success" className='ms-2'>{cartItems.length}</Badge>
 
             </Nav.Link>
           </Nav>
-          {/* <Nav>
-            <Nav.Link href='#modal'>
-              <ModalForm/>
-            </Nav.Link>
-          </Nav> */}
         </Navbar.Collapse>
       </Container>
     </Navbar>
