@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Products from './Products';
+import Products from '../Product/Products';
 import Badge from 'react-bootstrap/Badge'
 
 

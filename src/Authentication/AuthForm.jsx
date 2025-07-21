@@ -1,8 +1,8 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import AuthControl from './AuthControl';
-import { signIn } from './services/api/Auth';
-import { signUp } from './services/api/Auth';
+import { signIn } from '../services/api/Auth';
+import { signUp } from '../services/api/Auth';
 
 const actions = {
     SignIn: 'signIn',

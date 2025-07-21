@@ -1,16 +1,17 @@
 import './App.css'
 import React from 'react'
-import NavigationBar from "./NavigationBar"
-import Products from "./Products"
-import ProductPage from "./ProductPage"
+import NavigationBar from "./Navigation/NavigationBar"
+import Products from "./Product/Products"
+import ProductPage from "./Product/ProductPage"
 import Cart from "./Cart"
 import ModalForm from './ModalForm'
 import Footer from './Footer'
 import Slider from './Slider'
-import AuthModal from './AuthModal'
+import AuthModal from './Authentication/AuthModal'
 import { getAllProducts } from './services/API/products'
 import { jwtDecode } from 'jwt-decode'
 import ToastMessage from './ToastMessage'
+import { Routes, Route } from 'react-router'
 
 function App() {
   const [showCart, setShowCart] = React.useState(false)
@@ -71,13 +72,18 @@ function App() {
 
 
         <div className='main-content'>
-          <Products products={products} addProduct={addProduct} />
-          {/* <ProductPage setCartProducts={setCartProducts} addProduct={addProduct} /> */}
+
+        <Routes>
+          <Route index element={<Products products={products} addProduct={addProduct} />} />
+          <Route path='/product/:id' element={<ProductPage addProduct={addProduct} />} />
+        </Routes>
+
+          
           <Cart handleDeleteCartProduct={handleDeleteCartProduct} cartProducts={cartProducts} showCart={showCart} handleHideCart={handleHideCart} />
           <AuthModal show={showModal} handleClose={handleHideModal}  setAuthData={setAuthData} setToastMessage={setToastMessage}/>
           <ToastMessage message={toastMessage} handleclose={handleCloseToast} />
 
-        </div>
+        </div>-
         <div className='Slider-wrapper'>
           <Slider />
         </div>
