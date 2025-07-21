@@ -10,6 +10,7 @@ import Slider from './Slider'
 import AuthModal from './AuthModal'
 import { getAllProducts } from './services/API/products'
 import { jwtDecode } from 'jwt-decode'
+import ToastMessage from './ToastMessage'
 
 function App() {
   const [showCart, setShowCart] = React.useState(false)
@@ -19,6 +20,7 @@ function App() {
     jwt: '',
     data: {},
   })
+  const [toastMessage, setToastMessage] = React.useState(null)
 
   const [cartProducts, setCartProducts] = React.useState([])
 
@@ -28,6 +30,8 @@ function App() {
 
   const handleShowModal = () => setShowModal(true)
   const handleHideModal = () => setShowModal(false)
+
+  const handleCloseToast = () => setToastMessage(null)
 
   const handleDeleteCartProduct = (product) => {
     setCartProducts(cartProducts.filter(cartProduct => cartProduct.id !== product.id))
@@ -70,8 +74,8 @@ function App() {
           <Products products={products} addProduct={addProduct} />
           {/* <ProductPage setCartProducts={setCartProducts} addProduct={addProduct} /> */}
           <Cart handleDeleteCartProduct={handleDeleteCartProduct} cartProducts={cartProducts} showCart={showCart} handleHideCart={handleHideCart} />
-          <AuthModal show={showModal} handleClose={handleHideModal}  setAuthData={setAuthData}/>
-
+          <AuthModal show={showModal} handleClose={handleHideModal}  setAuthData={setAuthData} setToastMessage={setToastMessage}/>
+          <ToastMessage message={toastMessage} handleclose={handleCloseToast} />
 
         </div>
         <div className='Slider-wrapper'>
