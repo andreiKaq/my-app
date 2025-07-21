@@ -1,6 +1,6 @@
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import Products from './Products';
-import AnimatedBox from './AnimatedBox';
+import Products from '../Product/Products';
+import AnimatedBox from '../AnimatedBox';
 
 const Cart = ({ showCart, handleHideCart, cartProducts, setCartProducts, handleDeleteCartProduct}) => {
 

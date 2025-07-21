@@ -2,6 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import { NavLink } from 'react-router';
 
 function Product({ product, addProduct }) {
 
@@ -11,7 +12,13 @@ function Product({ product, addProduct }) {
     <Card>
       <Card.Img variant="top" src={product.image} />
       <Card.Body>
-        <Card.Title>{product.title}</Card.Title>
+        <Card.Title>
+          <NavLink to={`/product/${product.id}`}>
+            {product.title}
+
+          </NavLink>
+
+        </Card.Title>
         <Card.Text>
           {product.description}
         </Card.Text>

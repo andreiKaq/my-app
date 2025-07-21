@@ -1,8 +1,8 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import SignInForm from './SignInForm'
-import SignUpForm from './SignUpForm';
+import SignInForm from '../SignInForm'
+import SignUpForm from '../SignUpForm';
 import AuthForm from './AuthForm';
 
 function AuthModal({ show, handleClose, setAuthData, setToastMessage}) {

@@ -3,17 +3,17 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Badge from 'react-bootstrap/Badge';
-
+import {NavLink } from 'react-router'
 
 function NavigationBar({ handleShowCart, cartItems, handleShowModal, authData }) {
   return (
     <Navbar expand="lg" bg="dark-subtle" data-bs-theme="dark" className="mb-4">
       <Container>
-        <Navbar.Brand href="#home">Shop</Navbar.Brand>
+        <NavLink to='/' className='navbar-brand'>Shop</NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
+            <NavLink to='/' className='nav-link'>Home</NavLink>
             <Nav.Link href="#products">Products</Nav.Link>
             <NavDropdown title="More" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>

@@ -1,4 +1,4 @@
-import { apiUrl } from "./constants"
+import { apiUrl } from './constants'
 
 export const getAllProducts = async () => {
     const respone = await fetch(apiUrl + '/products')
@@ -7,3 +7,8 @@ export const getAllProducts = async () => {
 }
 
 
+export const getSingleProduct = async (id) => {
+    const respone = await fetch(apiUrl + '/products/' + id)
+    
+    return await respone.json()
+}
