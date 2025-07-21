@@ -10,7 +10,7 @@ const actions = {
 
 }
 
-function AuthForm({ formRef, setAuthData, handleClose }) {
+function AuthForm({ formRef, setAuthData, handleClose, setToastMessage}) {
     const [action, setAction] = React.useState(actions.SignIn)
 
     const handleOnSelect = (action) => setAction(action)
@@ -28,7 +28,7 @@ function AuthForm({ formRef, setAuthData, handleClose }) {
             const email = event.target.email?.value
             const user = await signUp(username, email, password)
             setAuthData(authData => ({...authData, user}))
-            console.log(user)
+            setToastMessage('New user created!')
         }
 
 

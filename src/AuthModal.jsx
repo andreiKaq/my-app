@@ -5,7 +5,7 @@ import SignInForm from './SignInForm'
 import SignUpForm from './SignUpForm';
 import AuthForm from './AuthForm';
 
-function AuthModal({ show, handleClose, setAuthData }) {
+function AuthModal({ show, handleClose, setAuthData, setToastMessage}) {
     const formRef = React.useRef()
 
     const handleClick = () => formRef.current.requestSubmit()
@@ -16,7 +16,7 @@ function AuthModal({ show, handleClose, setAuthData }) {
                 <Modal.Title>Modal heading</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <AuthForm formRef={formRef} setAuthData={setAuthData} handleClose={handleClose}/>
+                <AuthForm formRef={formRef} setAuthData={setAuthData} handleClose={handleClose} setToastMessage={setToastMessage} />
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
