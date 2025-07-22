@@ -10,14 +10,19 @@ import { useParams } from 'react-router'
 import { getSingleProduct } from '../services/API/products';
 
 
-const ProductPage = ({ setCartProducts, addProduct = { addProduct } }) => {
+const ProductPage = ({ setCartProducts, addProduct = { addProduct, setErrorMessage } }) => {
     const [product, setProduct] = React.useState({});
     const params = useParams();
 
     React.useEffect(() => {
         (async () => {
-            const product = await getSingleProduct(params.id);
-            setProduct(product);
+            try {
+                const product = await getSingleProduct(params.id);
+                setProduct(product);
+
+            } catch (error) {
+                setErrorMessage('Error getting products, please try again later!')
+            }
         })();
     }, []);
 

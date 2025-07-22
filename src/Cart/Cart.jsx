@@ -2,7 +2,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import Products from '../Product/Products';
 import AnimatedBox from '../AnimatedBox';
 
-const Cart = ({ showCart, handleHideCart, cartProducts, setCartProducts, handleDeleteCartProduct}) => {
+const Cart = ({addProduct, showCart, handleHideCart, cartProducts, setCartProducts, handleDeleteCartProduct}) => {
 
     return (
         <>
@@ -12,7 +12,7 @@ const Cart = ({ showCart, handleHideCart, cartProducts, setCartProducts, handleD
                     <Offcanvas.Title>Cart</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                    <Products classNameRow='flex-column' classNameCol='w-100' isCartProduct products={cartProducts} handleDeleteCartProduct={handleDeleteCartProduct} />
+                    <Products classNameRow='flex-column' classNameCol='w-100' isCartProduct products={cartProducts} handleDeleteCartProduct={handleDeleteCartProduct} addProduct={addProduct}/>
                 </Offcanvas.Body>
             </Offcanvas>
         </>

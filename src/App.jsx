@@ -12,18 +12,26 @@ import { getAllProducts } from './services/API/products'
 import { jwtDecode } from 'jwt-decode'
 import ToastMessage from './ToastMessage'
 import { Routes, Route } from 'react-router'
+import useCart from './effects/useCart'
+import ErrorModal from './ErrorModal'
+
 
 function App() {
+
   const [showCart, setShowCart] = React.useState(false)
   const [showModal, setShowModal] = React.useState(false)
-  const [products, setProducts] = React.useState([])
   const [authData, setAuthData] = React.useState({
     jwt: '',
     data: {},
   })
   const [toastMessage, setToastMessage] = React.useState(null)
 
-  const [cartProducts, setCartProducts] = React.useState([])
+  const {cart, addProduct, removeProduct} = useCart({
+    userId: authData.data.userId
+  })
+
+  const [products, setProducts] = React.useState([])
+  const [errorMessage, setErrorMessage] = React.useState(null)
 
 
   const handleShowCart = () => setShowCart(true);
@@ -33,20 +41,11 @@ function App() {
   const handleHideModal = () => setShowModal(false)
 
   const handleCloseToast = () => setToastMessage(null)
-
-  const handleDeleteCartProduct = (product) => {
-    setCartProducts(cartProducts.filter(cartProduct => cartProduct.id !== product.id))
-    // setCartProducts(cartProducts.slice(cartProducts.indexOf(product), 2))
-  }
-
-  const addProduct = (product) => {
-    setCartProducts(products => [...products, product])
-
-  }
+  const handleCloseError = () => setErrorMessage(null)
 
 
   React.useEffect(() => {
-    getAllProducts().then(products => setProducts(products))
+    getAllProducts().then(products => setProducts(products)).catch(error => setErrorMessage(error.toString()))
   }, []);
 
   React.useEffect(() => {
@@ -63,7 +62,7 @@ function App() {
 
         <NavigationBar
           handleShowCart={handleShowCart}
-          cartItems={cartProducts}
+          cartItems={cart.products || []}
           handleShowModal={handleShowModal}
           handleHideModal={handleHideModal}
           showModal={showModal}
@@ -75,13 +74,14 @@ function App() {
 
         <Routes>
           <Route index element={<Products products={products} addProduct={addProduct} />} />
-          <Route path='/product/:id' element={<ProductPage addProduct={addProduct} />} />
+          <Route path='/product/:id' element={<ProductPage addProduct={addProduct} setErrorMessage={setErrorMessage}/>} />
         </Routes>
 
           
-          <Cart handleDeleteCartProduct={handleDeleteCartProduct} cartProducts={cartProducts} showCart={showCart} handleHideCart={handleHideCart} />
+          <Cart addProduct={addProduct} handleDeleteCartProduct={removeProduct} cartProducts={cart.products || []} showCart={showCart} handleHideCart={handleHideCart} />
           <AuthModal show={showModal} handleClose={handleHideModal}  setAuthData={setAuthData} setToastMessage={setToastMessage}/>
           <ToastMessage message={toastMessage} handleclose={handleCloseToast} />
+          <ErrorModal message={errorMessage} handleClose={handleCloseError} />
 
         </div>-
         <div className='Slider-wrapper'>
