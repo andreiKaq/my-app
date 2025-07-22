@@ -13,7 +13,7 @@ function Products({ classNameRow, classNameCol, isCartProduct, products = dummyP
             <Row xs={1} md={2} lg={3} xl={4} className={classNameRow}>
                 {products.map((product, index) => (
                 <Col key={index} className={classNameCol}>
-                    {isCartProduct ? <ProductCart product={product} handleDeleteCartProduct={handleDeleteCartProduct} /> : <Product product={product} addProduct={addProduct}/>}
+                    {isCartProduct ? <ProductCart addProduct={addProduct}  product={product} handleDeleteCartProduct={handleDeleteCartProduct} /> : <Product product={product} addProduct={addProduct}/>}
                 </Col>
                 ))}
             </Row>
