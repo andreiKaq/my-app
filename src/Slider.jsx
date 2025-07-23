@@ -1,40 +1,37 @@
 import Carousel from 'react-bootstrap/Carousel';
 
-function Slider() {
+
+function Slider({ products }) {
+  if (!products || products.length === 0) {
+    return <p>Загрузка товаров...</p>;
+  }
+
+  // ✅ Используем product.rating.rate
+  const topRatedProducts = products.filter(product => product.rating?.rate >= 4.5);
+
+  if (topRatedProducts.length === 0) {
+    return <p>Нет товаров с рейтингом 4.8 и выше</p>;
+  }
+
   return (
     <div className="container my-4">
-      <div className="carousel-wrapper">
-        <Carousel data-bs-theme="dark">
-          <Carousel.Item>
+      <Carousel data-bs-theme="dark">
+        {topRatedProducts.map(product => (
+          <Carousel.Item key={product.id}>
             <img
               className="d-block w-100"
-              src="/picture-1.png"
-              alt="First slide"
+              src={product.image}
+              alt={product.title}
+              style={{ height: '400px', objectFit: 'contain', backgroundColor: '#ffffff'}}
             />
-            <Carousel.Caption className='text-white'>
-              {/* Можно добавить текст */}
+            <Carousel.Caption>
+              <h5 className=''>{product.title}</h5>
+              <p className=''>Рейтинг: {product.rating.rate}</p>
+              <p className=''>price: {product.price}</p>
             </Carousel.Caption>
           </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src="/picture-2.png"
-              alt="Second slide"
-            />
-            <Carousel.Caption className='text-white'>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src="/picture-3.png"
-              alt="Third slide"
-            />
-            <Carousel.Caption className='text-white'>
-            </Carousel.Caption>
-          </Carousel.Item>
-        </Carousel>
-      </div>
+        ))}
+      </Carousel>
     </div>
   );
 }

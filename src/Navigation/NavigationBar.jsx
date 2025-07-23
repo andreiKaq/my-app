@@ -3,11 +3,12 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Badge from 'react-bootstrap/Badge';
-import {NavLink } from 'react-router'
+import { NavLink } from 'react-router'
+import { FaShoppingBasket } from "react-icons/fa";
 
 function NavigationBar({ handleShowCart, cartItems, handleShowModal, authData }) {
   return (
-    <Navbar expand="lg" bg="dark-subtle" data-bs-theme="dark" className="mb-4">
+    <Navbar expand="lg" bg="dark-subtle" data-bs-theme="dark" className="mb-4 sticky-top">
       <Container>
         <NavLink to='/' className='navbar-brand'>Shop</NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -35,9 +36,10 @@ function NavigationBar({ handleShowCart, cartItems, handleShowModal, authData })
               </Nav.Link>
             )}
             <Nav.Link href="#cart" onClick={handleShowCart}>
-              Cart
-              <Badge bg="success" className='ms-2'>{cartItems.length}</Badge>
-
+              <FaShoppingBasket className='big-icon'/>
+              <Badge bg="success" className='ms-2'>
+                {cartItems.reduce((sum, product) => sum + (product.quantity ?? 1), 0)}
+              </Badge>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

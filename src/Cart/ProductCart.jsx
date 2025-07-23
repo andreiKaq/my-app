@@ -28,7 +28,7 @@ function ProductCart({ product, setCartProducts, handleDeleteCartProduct, addPro
         <Card className='bg-transparent text-white border border-secondary mb-4'>
             <Card.Body>
                 <Row className=''>
-                    <Col><Card.Img variant="top" src={product.image} width={100} height={100} /></Col>
+                    <Col><Card.Img variant="top" src={product.image} width={100} height={100} alt='err'/></Col>
                     <Col xs={6}>
                         <Card.Text>
                             <span className='fs-4'>{product.title}</span>
