@@ -7,13 +7,13 @@ import ProductCart from "../Cart/ProductCart"
 
 const dummyProducts = Array.from({length: 5})
 
-function Products({ classNameRow, classNameCol, isCartProduct, products = dummyProducts, handleDeleteCartProduct, addProduct}) {
+function Products({ isCheckout, classNameRow, classNameCol, isCartProduct, products = dummyProducts, handleDeleteCartProduct, addProduct}) {
     return (
         <Container>
             <Row xs={1} md={2} lg={3} xl={4} className={classNameRow}>
                 {products.map((product, index) => (
                 <Col key={index} className={classNameCol}>
-                    {isCartProduct ? <ProductCart addProduct={addProduct}  product={product} handleDeleteCartProduct={handleDeleteCartProduct} /> : <Product product={product} addProduct={addProduct}/>}
+                    {isCartProduct ? <ProductCart isCheckout={isCheckout} addProduct={addProduct}  product={product} handleDeleteCartProduct={handleDeleteCartProduct} /> : <Product product={product} addProduct={addProduct}/>}
                 </Col>
                 ))}
             </Row>

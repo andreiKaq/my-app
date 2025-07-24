@@ -3,11 +3,23 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Badge from 'react-bootstrap/Badge';
-import {NavLink } from 'react-router'
+import { NavLink } from 'react-router'
+import React from 'react';
 
 function NavigationBar({ handleShowCart, cartItems, handleShowModal, authData }) {
+
+  const productQuantity = React.useMemo(() => {
+    let quantity = 0
+
+    cartItems.map(product => {
+      quantity += product.quantity || 1
+    })
+
+    return quantity
+  }, [cartItems])
+
   return (
-    <Navbar expand="lg" bg="dark-subtle" data-bs-theme="dark" className="mb-4">
+    <Navbar expand="lg" bg="dark-subtle" data-bs-theme="dark" className="mb-4 sticky-top">
       <Container>
         <NavLink to='/' className='navbar-brand'>Shop</NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -36,7 +48,7 @@ function NavigationBar({ handleShowCart, cartItems, handleShowModal, authData })
             )}
             <Nav.Link href="#cart" onClick={handleShowCart}>
               Cart
-              <Badge bg="success" className='ms-2'>{cartItems.length}</Badge>
+              <Badge bg="success" className='ms-2'>{productQuantity}</Badge>
 
             </Nav.Link>
           </Nav>

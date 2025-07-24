@@ -5,9 +5,13 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Products from '../Product/Products';
 import Badge from 'react-bootstrap/Badge'
+import { useLocation } from 'react-router';
 
+function ProductCart({ product, setCartProducts, handleDeleteCartProduct, addProduct, isCheckout }) {
 
-function ProductCart({ product, setCartProducts, handleDeleteCartProduct, addProduct }) {
+    const location  = useLocation()
+
+    const showInfo = location.pathname === '/checkout' && isCheckout
 
     const handleAddCount = () => {
         addProduct(product)
@@ -33,7 +37,8 @@ function ProductCart({ product, setCartProducts, handleDeleteCartProduct, addPro
                         <Card.Text>
                             <span className='fs-4'>{product.title}</span>
                             <br/>
-                            id: {product.id}
+                            {showInfo && product.description}
+                            Count: {product.quantity ?? 1}
                         </Card.Text>
                     </Col>
                     <Col className='d-flex align-items-center flex-column'>
