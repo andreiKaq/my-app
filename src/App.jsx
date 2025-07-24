@@ -17,29 +17,21 @@ import ErrorModal from './ErrorModal'
 import Checkout from './Cart/Checkout'
 
 
-function App() {
 
-  const [showCart, setShowCart] = React.useState(false)
-  const [showModal, setShowModal] = React.useState(false)
+function App() {
   const [authData, setAuthData] = React.useState({
     jwt: '',
     data: {},
   })
   const [toastMessage, setToastMessage] = React.useState(null)
 
-  const {cart, addProduct, removeProduct} = useCart({
+  const {addProduct, removeProduct} = useCart({
     userId: authData.data.userId
   })
 
   const [products, setProducts] = React.useState([])
   const [errorMessage, setErrorMessage] = React.useState(null)
 
-
-  const handleShowCart = () => setShowCart(true);
-  const handleHideCart = () => setShowCart(false);
-
-  const handleShowModal = () => setShowModal(true)
-  const handleHideModal = () => setShowModal(false)
 
   const handleCloseToast = () => setToastMessage(null)
   const handleCloseError = () => setErrorMessage(null)
@@ -61,14 +53,7 @@ function App() {
     <>
       <div className='app-wrapper bg-dark'>
 
-        <NavigationBar
-          handleShowCart={handleShowCart}
-          cartItems={cart.products || []}
-          handleShowModal={handleShowModal}
-          handleHideModal={handleHideModal}
-          showModal={showModal}
-          authData={authData}
-        />
+        <NavigationBar authData={authData}/>
 
 
         <div className='main-content'>
@@ -76,12 +61,12 @@ function App() {
         <Routes>
           <Route index element={<Products products={products} addProduct={addProduct} />} />
           <Route path='/product/:id' element={<ProductPage addProduct={addProduct} setErrorMessage={setErrorMessage}/>} />
-          <Route path='/checkout' element={<Checkout addProduct={addProduct} handleDeleteCartProduct={removeProduct} cartProducts={cart.products || []}/>}/>
+          <Route path='/checkout' element={<Checkout addProduct={addProduct} handleDeleteCartProduct={removeProduct}/>}/>
         </Routes>
 
           
-          <Cart addProduct={addProduct} handleDeleteCartProduct={removeProduct} cartProducts={cart.products || []} showCart={showCart} handleHideCart={handleHideCart} />
-          <AuthModal show={showModal} handleClose={handleHideModal}  setAuthData={setAuthData} setToastMessage={setToastMessage}/>
+          <Cart addProduct={addProduct} handleDeleteCartProduct={removeProduct}/>
+          <AuthModal setAuthData={setAuthData} setToastMessage={setToastMessage}/>
           <ToastMessage message={toastMessage} handleclose={handleCloseToast} />
           <ErrorModal message={errorMessage} handleClose={handleCloseError} />
 

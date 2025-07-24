@@ -3,10 +3,13 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { NavLink } from 'react-router';
+import { useSelector } from 'react-redux';
 
 function Product({ product, addProduct }) {
 
-  const handleAddToCart = () => addProduct(product)
+  const cart = useSelector((state) => state.cart)
+  const handleAddToCart = () => addProduct(cart, product)
+  
 
   return (
     <Card>
