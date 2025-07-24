@@ -14,7 +14,7 @@ import ToastMessage from './ToastMessage'
 import { Routes, Route } from 'react-router'
 import useCart from './effects/useCart'
 import ErrorModal from './ErrorModal'
-
+import CheckOutPage from './CheckOutPage'
 
 function App() {
 
@@ -75,6 +75,7 @@ function App() {
         <Routes>
           <Route index element={<Products products={products} addProduct={addProduct} />} />
           <Route path='/product/:id' element={<ProductPage addProduct={addProduct} setErrorMessage={setErrorMessage}/>} />
+          <Route path='/checkOutPage' element={<CheckOutPage cartProducts={cart.products} addProduct={addProduct} removeProduct={removeProduct}/>}/>
         </Routes>
 
           
@@ -85,7 +86,7 @@ function App() {
 
         </div>-
         <div className='Slider-wrapper'>
-          <Slider />
+          <Slider products={products}/>
         </div>
 
         <footer>

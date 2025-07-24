@@ -6,15 +6,26 @@ function useCart({ userId }) {
 
     const addProduct = async (product) => {
         if (cart.id) {
+            
             cart.products = cart.products.map(cartProduct => {
                 cartProduct.quantity = cartProduct.quantity ?? 1
 
                 if (cartProduct.id === product.id) {
+                    
                     cartProduct.quantity = cartProduct.quantity + 1
 
-                    return cartProduct
+                    
                 }
+                return cartProduct
             })
+
+
+            const exists = cart.products.some(p => p.id === product.id)
+            if (!exists) {
+                cart.products.push({...product, quantity: 1})
+            }
+
+            
             const newData = await updateCart(cart.id, {
                 userId,
                 id: cart.id,
@@ -40,8 +51,10 @@ function useCart({ userId }) {
             if (cartProduct.id === product.id) {
                 cartProduct.quantity = cartProduct.quantity - 1
 
-                return cartProduct
             }
+
+            return cartProduct
+            
         }).filter(cartProduct => cartProduct.quantity !== 0)
 
         if (!cart.products.length) {
