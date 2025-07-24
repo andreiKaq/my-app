@@ -8,11 +8,13 @@ import Category from '../Navigation/Category';
 import Button from 'react-bootstrap/Button'
 import { useParams } from 'react-router'
 import { getSingleProduct } from '../services/API/products';
+import { useSelector } from 'react-redux';
 
 
 const ProductPage = ({ setCartProducts, addProduct = { addProduct, setErrorMessage } }) => {
     const [product, setProduct] = React.useState({});
     const params = useParams();
+    const cart = useSelector((state) => state.cart)
 
     React.useEffect(() => {
         (async () => {
@@ -50,7 +52,7 @@ const ProductPage = ({ setCartProducts, addProduct = { addProduct, setErrorMessa
                         <Badge bg="secondary">{product.rating?.rate} / {product.rating?.count}</Badge>
                     </div>
                     <div>
-                        <Button variant="outline-primary" onClick={() => addProduct(product)}>Add to cart</Button>
+                        <Button variant="outline-primary" onClick={() => addProduct(cart, product)}>Add to cart</Button>
                     </div>
 
                 </Col>

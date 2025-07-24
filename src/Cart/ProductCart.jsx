@@ -6,6 +6,8 @@ import Col from 'react-bootstrap/Col'
 import Products from '../Product/Products';
 import Badge from 'react-bootstrap/Badge'
 import { useLocation } from 'react-router';
+import { useSelector } from 'react-redux';
+
 
 function ProductCart({ product, setCartProducts, handleDeleteCartProduct, addProduct, isCheckout }) {
 
@@ -13,13 +15,15 @@ function ProductCart({ product, setCartProducts, handleDeleteCartProduct, addPro
 
     const showInfo = location.pathname === '/checkout' && isCheckout
 
+    const cart = useSelector((state) => state.cart)
+
     const handleAddCount = () => {
-        addProduct(product)
+        addProduct(cart, product)
     }
 
     const handleDelete = () => {
 
-            handleDeleteCartProduct(product)
+            handleDeleteCartProduct(cart, product)
 
     }
 
