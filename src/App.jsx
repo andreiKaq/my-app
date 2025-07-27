@@ -15,6 +15,7 @@ import { Routes, Route } from 'react-router'
 import useCart from './effects/useCart'
 import ErrorModal from './ErrorModal'
 import Checkout from './Cart/Checkout'
+import Category from './Navigation/Category'
 
 
 
@@ -49,10 +50,10 @@ function App() {
 
 
         <div className='main-content'>
-
+        
         <Routes>
           <Route index element={<Products products={products} addProduct={addProduct} />} />
-          <Route path='/product/:id' element={<ProductPage addProduct={addProduct}/>} />
+          <Route path='/product/:id' element={<ProductPage addProduct={addProduct} products={products}/>} />
           <Route path='/checkout' element={<Checkout addProduct={addProduct} handleDeleteCartProduct={removeProduct}/>}/>
         </Routes>
 

@@ -11,7 +11,7 @@ import { getSingleProduct } from '../services/API/products';
 import { useSelector } from 'react-redux';
 
 
-const ProductPage = ({ setCartProducts, addProduct = { addProduct, setErrorMessage } }) => {
+const ProductPage = ({ addProduct = { addProduct, setErrorMessage } }) => {
     const [product, setProduct] = React.useState({});
     const params = useParams();
     const cart = useSelector((state) => state.cart)
@@ -37,7 +37,7 @@ const ProductPage = ({ setCartProducts, addProduct = { addProduct, setErrorMessa
 
     return (
         <Container>
-            <Category />
+            <Category product={product}/>
             <Row>
                 <Col>
                     <img src={product.image} width={250}/>
