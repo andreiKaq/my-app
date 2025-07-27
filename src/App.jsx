@@ -23,19 +23,11 @@ function App() {
     jwt: '',
     data: {},
   })
-  const [toastMessage, setToastMessage] = React.useState(null)
 
   const {addProduct, removeProduct} = useCart({
     userId: authData.data.userId
   })
-
   const [products, setProducts] = React.useState([])
-  const [errorMessage, setErrorMessage] = React.useState(null)
-
-
-  const handleCloseToast = () => setToastMessage(null)
-  const handleCloseError = () => setErrorMessage(null)
-
 
   React.useEffect(() => {
     getAllProducts().then(products => setProducts(products)).catch(error => setErrorMessage(error.toString()))
@@ -60,15 +52,15 @@ function App() {
 
         <Routes>
           <Route index element={<Products products={products} addProduct={addProduct} />} />
-          <Route path='/product/:id' element={<ProductPage addProduct={addProduct} setErrorMessage={setErrorMessage}/>} />
+          <Route path='/product/:id' element={<ProductPage addProduct={addProduct}/>} />
           <Route path='/checkout' element={<Checkout addProduct={addProduct} handleDeleteCartProduct={removeProduct}/>}/>
         </Routes>
 
           
           <Cart addProduct={addProduct} handleDeleteCartProduct={removeProduct}/>
-          <AuthModal setAuthData={setAuthData} setToastMessage={setToastMessage}/>
-          <ToastMessage message={toastMessage} handleclose={handleCloseToast} />
-          <ErrorModal message={errorMessage} handleClose={handleCloseError} />
+          <AuthModal setAuthData={setAuthData}/>
+          <ToastMessage />
+          <ErrorModal  />
 
         </div>-
         <div className='Slider-wrapper'>
