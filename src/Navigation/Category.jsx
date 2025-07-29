@@ -1,13 +1,21 @@
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
+import { NavLink } from 'react-router';
 
-function Category() {
+
+function Category({product}) {
+
+  const secondCrumbItem = product ? product?.category || '' : 'Products'
+
+
   return (
     <Breadcrumb className="my-breadcrumb">
-      <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
-      <Breadcrumb.Item href="https://getbootstrap.com/docs/4.0/components/breadcrumb/">
-        Library
+      <Breadcrumb.Item href="#">
+        <NavLink to='/' className='nav-link'>Home</NavLink>
       </Breadcrumb.Item>
-      <Breadcrumb.Item active>Data</Breadcrumb.Item>
+      <Breadcrumb.Item href="#" active>
+        
+        {secondCrumbItem}
+      </Breadcrumb.Item>
     </Breadcrumb>
   );
 }

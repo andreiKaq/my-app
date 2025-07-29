@@ -3,12 +3,17 @@ import { createAction, createReducer, configureStore } from "@reduxjs/toolkit"
 const initialState = {
     showCart: false,
     showAuthForm: false,
-    cart: {}
+    cart: {},
+    toastMessage: null,
+    errorMessage: null,
+
 }
 
 export const setShowCart = createAction('setShowCart')
 export const setShowAuthForm = createAction('setShowAuthForm')
 export const setCart = createAction('setCart')
+export const setToastMessage = createAction('setToastMessage')
+export const setErrorMessage = createAction('setErrorMessage')
 
 const reducer = createReducer(initialState, builder => {
     builder
@@ -21,6 +26,13 @@ const reducer = createReducer(initialState, builder => {
     .addCase(setCart, (state, action) => {
         state.cart = action.payload
     })
+    .addCase(setToastMessage, (state, action) => {
+        state.toastMessage = action.payload
+    })
+    .addCase(setErrorMessage, (state, action) => {
+        state.errorMessage = action.payload
+    })
+
 
 })
 

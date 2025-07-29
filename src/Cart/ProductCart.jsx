@@ -42,6 +42,7 @@ function ProductCart({ product, setCartProducts, handleDeleteCartProduct, addPro
                             <span className='fs-4'>{product.title}</span>
                             <br/>
                             {showInfo && product.description}
+                            <br/>
                             Count: {product.quantity ?? 1}
                         </Card.Text>
                     </Col>
