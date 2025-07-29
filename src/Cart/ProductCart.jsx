@@ -7,9 +7,9 @@ import Products from '../Product/Products';
 import Badge from 'react-bootstrap/Badge'
 import { useLocation } from 'react-router';
 import { useSelector } from 'react-redux';
+import useCart from '../effects/useCart'
 
-
-function ProductCart({ product, setCartProducts, handleDeleteCartProduct, addProduct, isCheckout }) {
+function ProductCart({ product, isCheckout }) {
 
     const location  = useLocation()
 
@@ -17,13 +17,15 @@ function ProductCart({ product, setCartProducts, handleDeleteCartProduct, addPro
 
     const cart = useSelector((state) => state.cart)
 
+    const {addProduct, removeProduct} = useCart()
+
     const handleAddCount = () => {
         addProduct(cart, product)
     }
 
     const handleDelete = () => {
 
-            handleDeleteCartProduct(cart, product)
+            removeProduct(cart, product)
 
     }
 

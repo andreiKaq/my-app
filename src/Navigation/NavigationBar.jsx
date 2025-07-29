@@ -1,22 +1,23 @@
+import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Badge from 'react-bootstrap/Badge';
 import { NavLink } from 'react-router'
-import React from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import { setShowCart, setShowAuthForm } from '../services/state/store';
+import { UserContext } from '../providers/UserProvider';
 
 
 
 
 
-
-function NavigationBar({ authData }) {
+function NavigationBar() {
 
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart)
+  const {values: {authData}} = React.useContext(UserContext)
 
   const productQuantity = React.useMemo(() => {
     let quantity = 0
@@ -39,7 +40,7 @@ function NavigationBar({ authData }) {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <NavLink to='/' className='nav-link'>Home</NavLink>
-            <Nav.Link href="#products">Products</Nav.Link>
+            <NavLink to='/add-product' className='nav-link'>Add product</NavLink>
             <NavDropdown title="More" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">

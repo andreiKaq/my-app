@@ -1,9 +1,13 @@
+import React from "react";
 import { addNewCart, updateCart, deleteCart } from "../services/api/carts"
 import { useDispatch } from "react-redux"
 import { setCart } from "../services/state/store"
+import { UserContext } from "../providers/UserProvider";
 
-function useCart({ userId }) {
+
+function useCart() {
     const dispatch = useDispatch();
+    const {values: {authData }} = React.useContext(UserContext)
 
     const addProduct = async (cart, product) => {
         if (cart.id) {
@@ -19,7 +23,7 @@ function useCart({ userId }) {
                 updatedProducts = [...cart.products, product];
 
             const newData = await updateCart(cart.id, {
-                userId,
+                userId: authData.data.userId,
                 id: cart.id,
                 products: updatedProducts,
             });
@@ -27,7 +31,7 @@ function useCart({ userId }) {
             dispatch(setCart(newData));
         } else {
             const newData = await addNewCart({
-                userId,
+                userId: authData.data.userId,
                 products: [product],
             });
 
@@ -43,7 +47,7 @@ function useCart({ userId }) {
             else updatedProducts.push(cartProduct);
         }
 
-        updatedProducts = updatedProducts.filter(cartProduct => cartProduct.quantity !== 0);
+        updatedProducts = updatedProducts.filter(cartProduct => cartProduct.quantity > 0) || !cartProduct.quantity;
 
         if (!updatedProducts.length) {
             await deleteCart(cart.id)
@@ -51,7 +55,7 @@ function useCart({ userId }) {
             dispatch(setCart({}));
         } else {
             const newData = await updateCart(cart.id, {
-                userId,
+                userId: authData.data.userId,
                 id: cart.id,
                 products: updatedProducts,
             });
