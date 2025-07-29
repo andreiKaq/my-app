@@ -4,6 +4,7 @@ import AuthControl from './AuthControl';
 import { signIn } from '../services/api/Auth';
 import { signUp } from '../services/api/Auth';
 import { useDispatch } from 'react-redux';
+import { jwtDecode } from 'jwt-decode'
 
 const actions = {
     SignIn: 'signIn',
@@ -25,7 +26,8 @@ function AuthForm({ formRef, onSuccess, onError  }) {
         try {
             if (action === actions.SignIn) {
                 const { token } = await signIn(username, password)
-                onSuccess({ token })
+                onSuccess({data: jwtDecode(token)})
+                
             } else {
                 const email = event.target.email?.value
                 const user = await signUp(username, email, password)

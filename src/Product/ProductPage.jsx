@@ -9,9 +9,11 @@ import Button from 'react-bootstrap/Button'
 import { useParams } from 'react-router'
 import { getSingleProduct } from '../services/API/products';
 import { useSelector } from 'react-redux';
+import useCart from '../effects/useCart';
 
 
-const ProductPage = ({ addProduct = { addProduct, setErrorMessage } }) => {
+const ProductPage = () => {
+    const {addProduct} = useCart()
     const [product, setProduct] = React.useState({});
     const params = useParams();
     const cart = useSelector((state) => state.cart)
@@ -23,7 +25,7 @@ const ProductPage = ({ addProduct = { addProduct, setErrorMessage } }) => {
                 setProduct(product);
 
             } catch (error) {
-                setErrorMessage('Error getting products, please try again later!')
+                dispatch(setErrorMessage('Error getting products, please try again later!'))
             }
         })();
     }, []);

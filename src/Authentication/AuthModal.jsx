@@ -4,8 +4,11 @@ import Modal from 'react-bootstrap/Modal';
 import AuthForm from './AuthForm';
 import { useSelector, useDispatch } from 'react-redux';
 import { setShowAuthForm, setToastMessage, setErrorMessage } from '../services/state/store';
+import { UserContext } from '../providers/UserProvider';
 
-function AuthModal({ setAuthData }) {
+function AuthModal() {
+    const {actions: {setAuthData}} = React.useContext(UserContext)
+
     const formRef = React.useRef()
     const dispatch = useDispatch()
     const show = useSelector((state) => state.showAuthForm)
@@ -13,6 +16,7 @@ function AuthModal({ setAuthData }) {
     const handleClose = () => dispatch(setShowAuthForm(false))
 
     const handleLoginSuccess = userData => {
+        
         setAuthData(prev => ({ ...prev, ...userData }))
         dispatch(setToastMessage('Вход выполнен успешно'))
         dispatch(setErrorMessage(null))
