@@ -7,7 +7,7 @@ import { store } from './services/state/store.js';
 import UserProvider from './providers/UserProvider';
 
 createRoot(document.getElementById('root')).render(
-    <BrowserRouter>
+    <BrowserRouter basename='/my-app'>
         <Provider store={store}>
             <UserProvider>
                 <App />
