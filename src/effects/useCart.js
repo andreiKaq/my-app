@@ -1,13 +1,12 @@
 import React from "react";
-import { addNewCart, updateCart, deleteCart } from "../services/api/carts"
-import { useDispatch } from "react-redux"
-import { setCart } from "../services/state/store"
+import { addNewCart, updateCart, deleteCart } from "../services/api/carts";
+import { useDispatch } from "react-redux";
+import { setCart } from "../services/state/store";
 import { UserContext } from "../providers/UserProvider";
-
 
 function useCart() {
     const dispatch = useDispatch();
-    const {values: {authData }} = React.useContext(UserContext)
+    const { values: { authData } } = React.useContext(UserContext);
 
     const addProduct = async (cart, product) => {
         if (cart.id) {
@@ -16,11 +15,16 @@ function useCart() {
             const cartProduct = cart.products.find(cartProduct => cartProduct.id === product.id);
 
             if (cartProduct) {
-                const newQuantityProduct = { ...product, quantity: (cartProduct.quantity || 1) + 1 };
-                updatedProducts = cart.products.map(cartProduct => cartProduct.id === product.id ? newQuantityProduct : cartProduct)
+                const newQuantityProduct = {
+                    ...product,
+                    quantity: (cartProduct.quantity || 1) + 1
+                };
+                updatedProducts = cart.products.map(cartProduct =>
+                    cartProduct.id === product.id ? newQuantityProduct : cartProduct
+                );
+            } else {
+                updatedProducts = [...cart.products, { ...product, quantity: 1 }];
             }
-            else
-                updatedProducts = [...cart.products, product];
 
             const newData = await updateCart(cart.id, {
                 userId: authData.data.userId,
@@ -32,26 +36,25 @@ function useCart() {
         } else {
             const newData = await addNewCart({
                 userId: authData.data.userId,
-                products: [product],
+                products: [{ ...product, quantity: 1 }],
             });
 
             dispatch(setCart(newData));
         }
-    }
+    };
 
     const removeProduct = async (cart, product) => {
-        let updatedProducts = [];
+        const updatedProducts = cart.products
+            .map(cartProduct => {
+                if (cartProduct.id === product.id) {
+                    return { ...cartProduct, quantity: cartProduct.quantity - 1 };
+                }
+                return cartProduct;
+            })
+            .filter(cartProduct => cartProduct.quantity > 0);
 
-        for(const cartProduct of cart.products) {
-            if (cartProduct.id === product.id) updatedProducts.push({...cartProduct, quantity: cartProduct.quantity - 1});
-            else updatedProducts.push(cartProduct);
-        }
-
-        updatedProducts = updatedProducts.filter(cartProduct => cartProduct.quantity > 0) || !cartProduct.quantity;
-
-        if (!updatedProducts.length) {
-            await deleteCart(cart.id)
-
+        if (updatedProducts.length === 0) {
+            await deleteCart(cart.id);
             dispatch(setCart({}));
         } else {
             const newData = await updateCart(cart.id, {
@@ -62,12 +65,12 @@ function useCart() {
 
             dispatch(setCart(newData));
         }
-    }
+    };
 
     return {
         addProduct,
         removeProduct,
-    }
+    };
 }
 
 export default useCart;
