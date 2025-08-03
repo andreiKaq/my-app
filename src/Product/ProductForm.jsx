@@ -1,10 +1,41 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
 import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+import { addNewProduct } from '../services/api/products'
+import { useNavigate } from "react-router";
 
 
 function ProductForm() {
-    const handleSubmit = () => {}
+
+    const navigate = useNavigate();
+
+    const handleSubmit = e => {
+    e.preventDefault();
+    const form = e.target;
+
+    const file = form.image.files[0];
+    const imageUrl = file
+      ? URL.createObjectURL(file)
+      : 'https://via.placeholder.com/150';
+
+    const newId = `local-${Date.now()}`;
+    const newProduct = {
+      id: newId,
+      title: form.title.value,
+      price: form.price.value,
+      description: form.description.value,
+      category: form.category.value,
+      image: imageUrl,
+    };
+
+    const existing = JSON.parse(localStorage.getItem('localProducts')) || [];
+    existing.unshift(newProduct);
+    localStorage.setItem('localProducts', JSON.stringify(existing));
+
+    navigate('/');
+  };
+
 
     return (
         <Container>
@@ -42,6 +73,16 @@ function ProductForm() {
                         name="category"
                     />
                 </Form.Group>
+                <Form.Group className="mb-3">
+                    <Form.Label>Image</Form.Label>
+                    <Form.Control
+                        type="file"
+                        placeholder="Select image"
+                        name="image"
+                    />
+                </Form.Group>
+                <Button variant="outline-primary" type="submit">Add</Button>
+
             </Form>
         </Container>
     );

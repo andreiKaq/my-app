@@ -19,16 +19,22 @@ const ProductPage = () => {
     const cart = useSelector((state) => state.cart)
 
     React.useEffect(() => {
-        (async () => {
-            try {
-                const product = await getSingleProduct(params.id);
-                setProduct(product);
-
-            } catch (error) {
-                dispatch(setErrorMessage('Error getting products, please try again later!'))
-            }
-        })();
-    }, []);
+  (async () => {
+    const local = JSON.parse(localStorage.getItem('localProducts')) || [];
+    const lp = local.find(p => String(p.id) === params.id);
+    if (lp) {
+      setProduct(lp);
+      return;
+    }
+    try {
+      const fetched = await getSingleProduct(params.id);
+      if (fetched?.id) setProduct(fetched);
+      else setNotFound(true);
+    } catch {
+      setNotFound(true);
+    }
+  })();
+}, [params.id]);
 
 
 
