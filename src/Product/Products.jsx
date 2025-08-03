@@ -18,12 +18,15 @@ function Products({ isCheckout, classNameRow, classNameCol, isCartProduct, produ
 
   React.useEffect(() => {
   if (!isCartProduct) {
-    getAllProducts()
-      .then(serverProducts => {
-        const local = JSON.parse(localStorage.getItem("localProducts")) || [];
-        setProducts([...local, ...serverProducts]);
-      })
-      .catch(error => dispatch(setErrorMessage(error.toString())));
+    (async () => {
+      try {
+        const server = await getAllProducts();
+        const local = JSON.parse(localStorage.getItem('localProducts')) || [];
+        setProducts([...local, ...server]);
+      } catch (err) {
+        dispatch(setErrorMessage(err.toString()));
+      }
+    })();
   } else {
     setProducts(productsProps);
   }

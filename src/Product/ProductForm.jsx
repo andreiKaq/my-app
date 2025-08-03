@@ -10,47 +10,31 @@ function ProductForm() {
 
     const navigate = useNavigate();
 
-    const handleSubmit = async (event) => {
-    event.preventDefault();
+    const handleSubmit = e => {
+    e.preventDefault();
+    const form = e.target;
 
-    const title = event.target.title.value;
-    const price = event.target.price.value;
-    const description = event.target.description.value;
-    const category = event.target.category.value;
-    const imageFile = event.target.image.files[0];
+    const file = form.image.files[0];
+    const imageUrl = file
+      ? URL.createObjectURL(file)
+      : 'https://via.placeholder.com/150';
 
-    const reader = new FileReader();
-
-    reader.onloadend = () => {
-        const imageBase64 = reader.result;
-
-        const newProduct = {
-            id: Date.now(), // уникальный ID
-            title,
-            price,
-            description,
-            category,
-            image: imageBase64,
-        };
-
-        // Получаем уже сохраненные продукты
-        const existing = JSON.parse(localStorage.getItem("localProducts")) || [];
-        // Добавляем новый
-        existing.push(newProduct);
-        // Сохраняем обратно
-        localStorage.setItem("localProducts", JSON.stringify(existing));
-
-        // Переход на список продуктов
-        window.location.href = "/my-app";
+    const newId = `local-${Date.now()}`;
+    const newProduct = {
+      id: newId,
+      title: form.title.value,
+      price: form.price.value,
+      description: form.description.value,
+      category: form.category.value,
+      image: imageUrl,
     };
 
-    if (imageFile) {
-        reader.readAsDataURL(imageFile);
-    } else {
-        // Без картинки
-        reader.onloadend();
-    }
-};
+    const existing = JSON.parse(localStorage.getItem('localProducts')) || [];
+    existing.unshift(newProduct);
+    localStorage.setItem('localProducts', JSON.stringify(existing));
+
+    navigate('/');
+  };
 
 
     return (
