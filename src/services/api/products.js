@@ -15,3 +15,19 @@ export const getSingleProduct = async (id) => {
 
     return await respone.json()
 }
+
+export const addNewProduct = async (product) => {
+    const response = await fetch(apiUrl + '/products/', {
+        method: 'POST',
+        body: product
+
+    })
+    
+    const result = await response.json();
+
+    if (!response.ok) {
+        throw new Error(result.message || 'Failed to add product');
+    }
+
+    return result
+}

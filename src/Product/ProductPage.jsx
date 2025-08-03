@@ -28,7 +28,7 @@ const ProductPage = () => {
                 dispatch(setErrorMessage('Error getting products, please try again later!'))
             }
         })();
-    }, []);
+    }, [params.id]);
 
 
 

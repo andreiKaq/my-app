@@ -17,11 +17,18 @@ function Products({ isCheckout, classNameRow, classNameCol, isCartProduct, produ
   const [products, setProducts] = React.useState([])
 
   React.useEffect(() => {
-    if(!isCartProduct){
+  if (!isCartProduct) {
+    getAllProducts()
+      .then(serverProducts => {
+        const local = JSON.parse(localStorage.getItem("localProducts")) || [];
+        setProducts([...local, ...serverProducts]);
+      })
+      .catch(error => dispatch(setErrorMessage(error.toString())));
+  } else {
+    setProducts(productsProps);
+  }
+}, [isCartProduct, productsProps]);
 
-        getAllProducts().then(products => setProducts(products)).catch(error => dispatch(setErrorMessage(error.toString())))
-    } else setProducts(productsProps)
-  }, [isCartProduct, productsProps]);
 
 
     return (
