@@ -29,6 +29,8 @@ function ProductForm() {
       image: imageUrl,
     };
 
+    addNewProduct(newProduct)
+
     const existing = JSON.parse(localStorage.getItem('localProducts')) || [];
     existing.unshift(newProduct);
     localStorage.setItem('localProducts', JSON.stringify(existing));
@@ -39,7 +41,7 @@ function ProductForm() {
 
     return (
         <Container>
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} className="text-white">
                 <Form.Group className="mb-3">
                     <Form.Label>Title</Form.Label>
                     <Form.Control
