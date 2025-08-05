@@ -10,6 +10,7 @@ import { useParams } from 'react-router'
 import { getSingleProduct } from '../services/API/products';
 import { useSelector } from 'react-redux';
 import useCart from '../effects/useCart';
+import { useLocation } from 'react-router';
 
 
 const ProductPage = () => {
@@ -17,12 +18,17 @@ const ProductPage = () => {
     const [product, setProduct] = React.useState({});
     const params = useParams();
     const cart = useSelector((state) => state.cart)
+    const { state } = useLocation()
 
     React.useEffect(() => {
         (async () => {
             try {
-                const product = await getSingleProduct(params.id);
-                setProduct(product);
+                if(state) {
+                  setProduct(state)
+                } else {
+                  const product = await getSingleProduct(params.id);
+                  setProduct(product);
+                }
 
             } catch (error) {
                 dispatch(setErrorMessage('Error getting products, please try again later!'))

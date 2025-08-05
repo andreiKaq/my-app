@@ -18,7 +18,7 @@ function Product({ product }) {
       <Card.Img variant="top" src={product.image} />
       <Card.Body>
         <Card.Title>
-          <NavLink to={`/product/${product.id}`}>
+          <NavLink state={product} to={`/product/${product.id}`}>
             {product.title}
 
           </NavLink>
