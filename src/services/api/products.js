@@ -15,3 +15,18 @@ export const getSingleProduct = async (id) => {
 
     return await respone.json()
 }
+
+export const addNewProduct = async (data) => {
+    const respone = await fetch(apiUrl + '/products/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    })
+
+    if (!respone.ok) {
+        throw new Error('Oops something went wrong with adding product!')
+    }
+
+    return await respone.json()
+}
+

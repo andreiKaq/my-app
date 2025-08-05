@@ -7,20 +7,27 @@ import ProductCart from "../Cart/ProductCart"
 import { getAllProducts } from '../services/api/products'
 import { setErrorMessage } from '../services/state/store'
 import { useDispatch } from 'react-redux'
+import { useLocation } from "react-router"
 
 
 
 function Products({ isCheckout, classNameRow, classNameCol, isCartProduct, products: productsProps}) {
 
-    const dispatch = useDispatch()
+  const { state } = useLocation()
+  
+
+  const dispatch = useDispatch()
 
   const [products, setProducts] = React.useState([])
 
   React.useEffect(() => {
     if(!isCartProduct){
-
-        getAllProducts().then(products => setProducts(products)).catch(error => dispatch(setErrorMessage(error.toString())))
-    } else setProducts(productsProps)
+        getAllProducts()
+        .then(products => setProducts(state?.addedProduct ? [state.addedProduct, ...products] : products))
+        .catch(error => dispatch(setErrorMessage(error.toString())))
+    } else {
+      setProducts(productsProps)
+    }
   }, [isCartProduct, productsProps]);
 
 
